@@ -10,8 +10,10 @@ import {DrawerItems } from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { connect } from 'react-redux';
+
 import * as actions from '../../redux/actions/index';
-var {isLogined} = this.props;
+
+// var {isLogined} = this.props;
 const CustomDrawerContentComponent = (props) => (
     <ScrollView >
       <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
@@ -20,9 +22,11 @@ const CustomDrawerContentComponent = (props) => (
                 <Icon name="user" size={50} />
             </View>
             <Text>
-                {isLogined.userName}
+                {/* {isLogined.userName} */}
+                Đăng nhập
             </Text>
         </View>
+        
         <DrawerItems  {...props} />
         <TouchableOpacity>
             <Text>
@@ -35,7 +39,7 @@ const CustomDrawerContentComponent = (props) => (
 
   const mapStateToProps = state => { 
     return {
-        isLogined: state.isLogined
+        // isLogined: state.Logined
     }
 }
 

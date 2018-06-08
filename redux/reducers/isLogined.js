@@ -1,12 +1,12 @@
 import * as types from '../constant';
-import {isLogined, logout } from './../actions/index'
+import {isLogined, logout } from './../actions/index';
 
 var initialState = {
     status: false,
     userName: ''
 }
 
-const isLogined = (state = initialState, action) => {
+const Logined = (state = initialState, action) => {
     switch (action.type) {
         case types.LOGINED:
             
@@ -26,4 +26,4 @@ const isLogined = (state = initialState, action) => {
     }
 }
 
-export default isLogined;
+export default Logined;

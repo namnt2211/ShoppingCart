@@ -42,3 +42,10 @@ export const logout = () =>{
         type: types.LOGOUT,
     }
 }
+
+export const searchProduct = (products) =>{
+    return {
+        type: types.SEARCH_PRODUCT,
+        products
+    }
+}

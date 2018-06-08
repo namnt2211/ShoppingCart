@@ -19,11 +19,10 @@ const widthImageProduct = (width - 60) / 2;
 const heightImageProduct = widthImageProduct * 1200 / 800;
  class TopProduct extends Component {
 
-
     render() {
-
-        var {products, addProduct} = this.props;
-
+        
+        var {searchProduct, products, addProduct} = this.props;
+        const data = searchProduct.length === 0 ? products : searchProduct;
         return (
             <View style={styles.container} elevation = {10} >
 
@@ -34,11 +33,11 @@ const heightImageProduct = widthImageProduct * 1200 / 800;
                 </View>
 
                 <View style={styles.body} >
-
+                
                     <FlatList
                         numColumns = {2}
                         keyExtractor={(item, index) => item.name}
-                        data = {products}
+                        data = {data}
                         renderItem = {({item, index}) =>{
                             return (
                                 <View style={styles.ProductContainer}  >
@@ -67,6 +66,7 @@ const heightImageProduct = widthImageProduct * 1200 / 800;
                     >
                     
                     </FlatList>
+
                 </View>
             </View>
         );
@@ -122,7 +122,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps  = state =>{
     return {
-        products: state.products
+        products: state.products,
+        searchProduct: state.searchProduct
     }
 }
 
