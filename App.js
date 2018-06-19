@@ -1,18 +1,7 @@
 
 import React, { Component } from 'react';
-import {
+import DrawerScreen from './App/Navigations/DrawerComponent';
 
-  StyleSheet,
-} from 'react-native';
-
-
-
-import TabComponents from './components/tabComponent/tabComponents';
-import TopProduct from './components/tabComponent/topProduct';
-import Category from './components/tabComponent/Category'
-import DrawerScreen from './components/drawerComponents/DrawerComponent'
-
-import HeaderComponent from './components/HeaderComponent'
 export default class App extends Component {
   render() {
     return  <DrawerScreen/>
@@ -26,10 +15,3 @@ export default class App extends Component {
      
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#e0e2e5',
-  }
-});
