@@ -9,14 +9,8 @@ import TabComponents from './tabComponents';
 
 
 export default Index = () =>(
-  <View style={styles.container}>
+  <View style={{flex: 1}}>
         <HeaderComponent/>
         <TabComponents/>
       </View>
 )
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,  
-  }, 
-});

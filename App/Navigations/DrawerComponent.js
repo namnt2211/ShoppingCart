@@ -7,18 +7,23 @@ import {
 import InfoComponent from '../containers/UserModule/InformationUser/Info'
 import OrderHistory from '../containers/OrderHistoryModule/OrderHistory'
 import {DrawerNavigator, DrawerItems, SafeAreaView} from 'react-navigation';
-import CustomDrawerContentComponent from '../containers/SlideMenu/SlideMenu'
-import TabComponent from './tabComponents'
+import CustomDrawerContentComponent from '../containers/SlideMenu/SlideMenu';
+import Icon from 'react-native-vector-icons/FontAwesome'
+import TabComponent from './tabComponents';
 // Screen size
 var {height, width} = Dimensions.get('window');
 
 let routeConfigs = {
-    'Index':{ screen: TabComponent},
+    'Index':{ screen: TabComponent,
+        navigationOptions: ({ navigation }) => ({
+            drawerLabel: 'Trang chủ',
+            drawerIcon: <Icon name="home" size={26} />
+         
+        })},
     'OrderHistory':{screen:OrderHistory},
     'InfoComponent':{
         screen: InfoComponent
     },
-    
 }
 
 let drawerNavigationConfig = {

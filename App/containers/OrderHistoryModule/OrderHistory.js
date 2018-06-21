@@ -7,11 +7,13 @@ import {
 	View, Button, TouchableOpacity,
 	ActivityIndicator
 } from 'react-native';
-
+import Icon from 'react-native-vector-icons/FontAwesome'
+import HeaderComponent from '../HeaderModule/HeaderComponent'
 export default class OrderHistory extends Component {
 	static navigationOptions = ({ navigation }) => {
 		const { params = {} } = navigation.state;
-        let drawerLabel = 'Order History';
+		let drawerLabel = 'Lịch sử mua hàng';
+		let drawerIcon = <Icon name="history" size={26} />
         // let drawerIcon = () => (
 		// 	<Image
 		// 		source = {require('../icon/checklist_26.png')}
@@ -19,7 +21,7 @@ export default class OrderHistory extends Component {
         //     />
 		// );
             
-		return {drawerLabel }
+		return {drawerLabel, drawerIcon }
 	}
 
 	render() {
@@ -27,6 +29,7 @@ export default class OrderHistory extends Component {
 
 		return (
             <View style={styles.container}>
+				<HeaderComponent {...this.props}/>
 				<View style = {{flex: 1,
 					
 					justifyContent: 'center',

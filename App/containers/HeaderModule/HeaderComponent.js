@@ -1,20 +1,16 @@
 
 import React, { Component } from 'react';
 import {
-    StyleSheet,
-    Text,
-    Image,
-    View, Button, TouchableOpacity,
-    ActivityIndicator,
-    TextInput,
-    FlatList
+    View,
+    TouchableOpacity,
+
 } from 'react-native';
 import * as actions from '../../redux/actions/index'
-
+import {Colors1, Colors2} from '../../Themes/Colors'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SearchBar from 'react-native-searchbar';
 import {connect} from 'react-redux';
-
+import HeaderStyles from './HeaderStyles'
 class HeaderComponent extends Component {
 
     constructor(props){
@@ -32,26 +28,28 @@ class HeaderComponent extends Component {
 
     render() {
 
-        const {products, navigation, search } = this.props;
+        const {products, navigation, mode } = this.props;
+		var color = mode === true ? Colors1 : Colors2;
+        const styless = HeaderStyles(color);
+        
         return (
-            <View style={styles.container}>
-                <View style={styles.openDrawer} >
+            <View style={styless.container}>
+                <View style={styless.openDrawer} >
                     <TouchableOpacity
-                        style={{ marginLeft: 10, justifyContent: 'flex-start' }}
+                        style={styless.btnMenu}
                         onPress={() => {
                             navigation.openDrawer();
                             // navigation.closeDrawer() // navigation.toggleDrawer()
                         }}
                     >
-                        <Icon name="list-ul" size={26} color="#6a6b6d" />
+                        <Icon name="list-ul" size={26} color= {color.dark} />
 
                     </TouchableOpacity>
-
                     <TouchableOpacity
-                        style={{ marginRight: 10, justifyContent: 'flex-end' }}
+                        style={styless.btnSearch}
                         onPress={() => this.searchBar.show()}
                     >
-                        <Icon name="search" size={26} color="#6a6b6d" />
+                        <Icon name="search" size={26} color={color.dark} />
                     </TouchableOpacity>
                 </View>
                 <SearchBar
@@ -67,26 +65,11 @@ class HeaderComponent extends Component {
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        height: 50,
-        justifyContent: 'center',
-        backgroundColor: '#abc9fc',
-       
-
-
-    },
-    openDrawer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    }
-
-});
 
 const mapStateToProps  = state =>{
     return {
-        products: state.products
+        products: state.products,
+        mode : state.changeMode
     }
 }
 

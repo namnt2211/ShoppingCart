@@ -7,8 +7,7 @@ import Contact from '../containers/HomeModule/ContactModule/contact';
 import Products from '../containers/HomeModule/ListProductModule/TopProduct/products';
 import DetailsItem from '../containers/HomeModule/DetailsProductModule/detailsItem';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import HeaderComponent from '../containers/HeaderModule/HeaderComponent'
-
+import HeaderComponent from '../containers/HeaderModule/HeaderComponent';
 let routeConfigs = {
     "Home": {
         screen: Products,
@@ -27,15 +26,13 @@ let routeConfigs = {
     },
 }
 
-
 let TabNavigatorConfig = {
     tabBarPosition: 'bottom',
     animationEnabled: true,
     swipeEnabled: true,
     tabBarOptions: {
-        activeTintColor : 'red',
         indicatorStyle :{
-            backgroundColor: 'blue'
+            backgroundColor: 'darkviolet'
         },
         labelStyle: {
             fontSize: 13,

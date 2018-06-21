@@ -1,5 +1,5 @@
-import { call, put, select, takeEvery } from 'redux-saga/effects'
-import { ADD_TO_CART, ADD_NUMBER } from '../../../redux/constant';
+import { call, put, select, takeEvery, takeLatest } from 'redux-saga/effects'
+import { ADD_TO_CART, ADD_NUMBER, ADD_PRODUCT, ADD_NUM } from '../../../redux/constant';
 
 var findIndex = (Products, id) => {
     var result = -1;
@@ -14,15 +14,17 @@ var findIndex = (Products, id) => {
 function* addToCart(action) {
     var getCart = yield select(state => state.cart)
     var id= yield action.product.id;
+    var product = action.product;
     var index = yield call(findIndex, getCart, id);
-    console.log(action.product)
-    // if (index !== -1) {
-    //     yield put({type: ADD_NUMBER, action: action.product})
-    // }
-    // else
-        // yield put({type: ADD_TO_CART,action: action.product})
+    if (index !== -1) {
+        yield put({type: ADD_NUMBER, index})
+    }
+    else
+        yield put({type: ADD_PRODUCT,product})
 
 }
+
+
 
 export function* watchAddToCart(){    
     yield takeEvery(ADD_TO_CART, addToCart)

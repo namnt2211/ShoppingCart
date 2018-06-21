@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import {
     Text,
     View,
-    TextInput,
     TouchableOpacity,
     FlatList,
     Image,
@@ -15,6 +14,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../../redux/actions/index';
 import * as message from '../../../redux/message';
 import CartStyles from './cartStyles';
+import {Colors1, Colors2} from '../../../Themes/Colors';
 
 class CartComponent extends Component {
 
@@ -46,57 +46,59 @@ class CartComponent extends Component {
     }
 
     render() {
-        let pay = 0;
-        const { addProduct, cart, onDelete, addNumberProduct, subNumberProduct } = this.props;
-
+        const {cart, onDelete, addNumberProduct, subNumberProduct,mode } = this.props;
+        var color = mode === true ? Colors1 : Colors2;
+		const styless = CartStyles(color);
         return (
             cart.length === 0 ?
             <View>
-                <Text style = {CartStyles.priceProduct} >
+                <Text style = {styless.priceProduct} >
                     {message.NO_CART}
                 </Text>
             </View>             
             :
-            <View style={CartStyles.container}>
+            <View style={styless.container}>
                 <ScrollView>
                 <FlatList      
                     keyExtractor={(item, index) => item.name}              
                     data={cart}
                     renderItem={({ item, index }) => {
                         return (
-                            <View style={CartStyles.ProductContainer}  >
-                                <Image style={CartStyles.ImageProduct} source={{ uri: item.image }} />
+                            <View style={styless.ProductContainer}  >
+                                <Image 
+                                    style={styless.ImageProduct} 
+                                    source={{ uri: item.image }} />
                                 <View style={{ flexDirection: 'column', width: 200, justifyContent: 'space-around'  }} >
                                         
-                                    <Text style={CartStyles.nameProduct} >
+                                    <Text style={styless.nameProduct} >
                                         Tên: {item.name}
                                     </Text>
-                                    <Text style={CartStyles.priceProduct} >
+                                    <Text style={styless.priceProduct} >
                                         Giá: {item.price} $
                                     </Text>
 
                                     <View style={{ flexDirection: 'row'}}  >
-                                    <Text style={CartStyles.priceProduct} >
+                                    <Text style={styless.priceProduct} >
                                             Số lượng:
                                         </Text>
                                         <TouchableOpacity style = {{marginHorizontal: 20}}
                                             onPress = {()=> subNumberProduct(item.id)}
                                          >
-                                            <Icon name="minus" size={26} />
+                                            <Icon name="minus" size={26} color = {color.text}/>
                                         </TouchableOpacity>
-                                            <Text style={CartStyles.number}  >
+                                            <Text style={styless.number}  >
                                                 {item.number}
                                             </Text>
                                         <TouchableOpacity  style = {{marginHorizontal: 20}} onPress = {()=> addNumberProduct(item.id)}>
-                                            <Icon name="plus" size={26} />
+                                            <Icon name="plus" size={26} color = {color.text} />
                                         </TouchableOpacity>
                                         
                                     </View>
                                     
                                 </View>
-                                <View  style ={CartStyles.buttonCancel} >
+                                <View  style ={styless.buttonCancel} >
                                         <TouchableOpacity onPress = {() => onDelete(item.id)} >
-                                            <Icon name="times-circle" size={26} />
+                                            <Icon name="times-circle" size={26} color = {color.text} />
                                         </TouchableOpacity>
                                         </View>
                                        
@@ -109,12 +111,12 @@ class CartComponent extends Component {
 
                     <View style = {{flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between', }} >
                     
-                        <Text style={CartStyles.priceProduct}>
+                        <Text style={styless.priceProduct}>
                         Tổng tiền: {this.showTotalAmount(cart)} $
                         </Text>
                         
-                        <TouchableOpacity style = {{backgroundColor: 'darkviolet', borderRadius: 5, margin: 10 }} >
-                            <Text style = {{fontSize: 18, marginVertical: 5, marginHorizontal: 20,}} >
+                        <TouchableOpacity style = {styless.btnPay} >
+                            <Text style = {styless.txtPay} >
                                 Đặt mua
                             </Text>
                         </TouchableOpacity>
@@ -127,7 +129,8 @@ class CartComponent extends Component {
 
 const mapStateToProps = state => { 
     return {
-        cart: state.cart
+        cart: state.cart,
+        mode : state.changeMode
     }
 }
 const mapDispatchToProps = (dispatch, props) =>{  

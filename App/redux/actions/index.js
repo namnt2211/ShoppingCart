@@ -1,8 +1,16 @@
 import * as types from '../constant';
 
+
 export const actAddToCart = (product) =>{
     return {
         type: types.ADD_TO_CART,
+        product
+    }
+}
+
+export const actAddProduct = (product) =>{
+    return {
+        type: types.ADD_PRODUCT,
         product
     }
 }
@@ -47,5 +55,11 @@ export const searchProduct = (products) =>{
     return {
         type: types.SEARCH_PRODUCT,
         products
+    }
+}
+
+export  const changeModeAct = () =>{
+    return {
+        type: types.CHANGE_MODE,
     }
 }

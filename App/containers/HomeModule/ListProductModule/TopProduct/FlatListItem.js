@@ -4,37 +4,44 @@ import {
 	Text,
 	Image,
 	View,
-	TouchableOpacity
+	TouchableOpacity,
+	Dimensions
 } from 'react-native';
+
 import { connect } from 'react-redux';
 import * as actions from '../../../../redux/actions/index'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ProductStyles from './ProductStyles'
+import {Colors1 ,Colors2} from '../../../../Themes/Colors';
+
 
 class FlatListItem extends Component {
+	
 	render() {
-		var {addProduct, item} = this.props;
+		var {addProduct, item, mode} = this.props;
+		var color = mode === true ? Colors1 : Colors2;
+		const styless = ProductStyles(color);
+
 		return (
-			<View style={ProductStyles.ProductContainer}  >
-				<Image style={ProductStyles.ImageProduct} source={{ uri: item.image }} />
-				<View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }} >
+			<View style={styless.ProductContainer}  >
+				<Image style={styless.ImageProduct} source={{ uri: item.image }} />
+				<View style={styless.infoProduct} >
 					<View style={{ flexDirection: 'column' }} >
-						<Text style={ProductStyles.nameProduct} >
+						<Text style={styless.nameProduct} >
 							{item.name}
 						</Text>
-						<Text style={ProductStyles.priceProduct} >
-							{item.price} $
+						<Text style={styless.priceProduct} >
+							{item.price} $ 
                         </Text>
 					</View>
 
 					<View style={{ marginRight: 5 }}  >
 						<TouchableOpacity onPress={() =>{
 							return(
-								console.log('object'),
 								addProduct(item)
 							)
 						}}  >
-							<Icon name="cart-plus" size={26} />
+							<Icon name="cart-plus" size={26} color = {color.lightBlue} />
 						</TouchableOpacity>
 					</View>
 				</View>
@@ -44,6 +51,14 @@ class FlatListItem extends Component {
 	}
 }
 
+
+const mapStateToProps = state => { 
+    return {
+
+        mode : state.changeMode
+    }
+}
+
 const mapDispatchToProps = (dispatch) =>{
     return{
         addProduct: (item) => dispatch(actions.actAddToCart(item)),
@@ -51,4 +66,4 @@ const mapDispatchToProps = (dispatch) =>{
     }
 }
 
-export default connect(null, mapDispatchToProps)(FlatListItem);
+export default connect(mapStateToProps, mapDispatchToProps)(FlatListItem);
