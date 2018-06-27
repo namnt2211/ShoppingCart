@@ -14,9 +14,9 @@ import { connect } from 'react-redux';
 import * as actions from '../../../redux/actions/index';
 import * as message from '../../../redux/message';
 import CartStyles from './cartStyles';
-import {Colors1, Colors2} from '../../../Themes/Colors';
+import BaseComponent from '../../../components/BaseComponent'
 
-class CartComponent extends Component {
+class CartComponent extends BaseComponent {
 
     static navigationOptions = ({ navigation }) => {
         const { params = {} } = navigation.state;
@@ -31,7 +31,8 @@ class CartComponent extends Component {
         super(props);
         this.state = {
             newProduct: '',
-            a: 1
+            a: 1,
+            color : this.getColor()
         }
     }
 
@@ -46,12 +47,13 @@ class CartComponent extends Component {
     }
 
     render() {
+        
         const {cart, onDelete, addNumberProduct, subNumberProduct,mode } = this.props;
-        var color = mode === true ? Colors1 : Colors2;
-		const styless = CartStyles(color);
+        // var color = mode === true ? Colors1 : Colors2;
+		const styless = CartStyles(this.state.color);
         return (
             cart.length === 0 ?
-            <View>
+            <View style = {styless.container} >
                 <Text style = {styless.priceProduct} >
                     {message.NO_CART}
                 </Text>
@@ -84,13 +86,13 @@ class CartComponent extends Component {
                                         <TouchableOpacity style = {{marginHorizontal: 20}}
                                             onPress = {()=> subNumberProduct(item.id)}
                                          >
-                                            <Icon name="minus" size={26} color = {color.text}/>
+                                            <Icon name="minus" size={26} color = {this.state.color.text}/>
                                         </TouchableOpacity>
                                             <Text style={styless.number}  >
                                                 {item.number}
                                             </Text>
                                         <TouchableOpacity  style = {{marginHorizontal: 20}} onPress = {()=> addNumberProduct(item.id)}>
-                                            <Icon name="plus" size={26} color = {color.text} />
+                                            <Icon name="plus" size={26} color = {this.state.color.text} />
                                         </TouchableOpacity>
                                         
                                     </View>
@@ -98,7 +100,7 @@ class CartComponent extends Component {
                                 </View>
                                 <View  style ={styless.buttonCancel} >
                                         <TouchableOpacity onPress = {() => onDelete(item.id)} >
-                                            <Icon name="times-circle" size={26} color = {color.text} />
+                                            <Icon name="times-circle" size={26} color = {this.state.color.text} />
                                         </TouchableOpacity>
                                         </View>
                                        
@@ -127,7 +129,7 @@ class CartComponent extends Component {
 }
 
 
-const mapStateToProps = state => { 
+const mapStateToProps = (state) => { 
     return {
         cart: state.cart,
         mode : state.changeMode

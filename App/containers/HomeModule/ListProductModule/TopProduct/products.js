@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import {
     StyleSheet,
-    ScrollView
+    ScrollView,
 } from 'react-native';
 
 import TopProduct from './topProduct';

@@ -8,15 +8,20 @@ import {
 import Swiper from 'react-native-swiper';
 import Images from '../../../../Themes/Images'
 import CategoryStyles, {widthSwiper, heightSwiper} from './CategoryStyles';
-import {Colors1, Colors2} from '../../../../Themes/Colors';
 import { connect } from 'react-redux';
-
-class Category extends Component {
+import BaseComponent from '../../../../components/BaseComponent'
+class Category extends BaseComponent {
+	constructor(props) {
+	  super(props)
+	
+	  this.state = {
+		 color: this.getColor()
+	  };
+	};
+	
 	render() {
 
-		var {mode} = this.props;
-		var color = mode === true ? Colors1 : Colors2;
-		const styless = CategoryStyles(color);
+		const styless = CategoryStyles(this.state.color);
 		return (
 			<View style={styless.container} elevation={5} >
 

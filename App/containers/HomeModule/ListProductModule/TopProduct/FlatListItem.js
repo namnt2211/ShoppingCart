@@ -11,16 +11,22 @@ import {
 import { connect } from 'react-redux';
 import * as actions from '../../../../redux/actions/index'
 import Icon from 'react-native-vector-icons/FontAwesome';
-import ProductStyles from './ProductStyles'
-import {Colors1 ,Colors2} from '../../../../Themes/Colors';
+import ProductStyles from './ProductStyles';
+import BaseComponent from '../../../../components/BaseComponent'
 
-
-class FlatListItem extends Component {
+class FlatListItem extends BaseComponent {
+	constructor(props) {
+	  super(props)
+	
+	  this.state = {
+		 color: this.getColor()
+	  };
+	};
+	
 	
 	render() {
-		var {addProduct, item, mode} = this.props;
-		var color = mode === true ? Colors1 : Colors2;
-		const styless = ProductStyles(color);
+		var {addProduct, item} = this.props;
+		const styless = ProductStyles(this.state.color);
 
 		return (
 			<View style={styless.ProductContainer}  >
@@ -41,7 +47,7 @@ class FlatListItem extends Component {
 								addProduct(item)
 							)
 						}}  >
-							<Icon name="cart-plus" size={26} color = {color.lightBlue} />
+							<Icon name="cart-plus" size={26} color = {this.state.color.lightBlue} />
 						</TouchableOpacity>
 					</View>
 				</View>

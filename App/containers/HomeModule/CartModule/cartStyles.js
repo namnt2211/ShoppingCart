@@ -1,4 +1,4 @@
-import {StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet, Dimensions, Platform } from 'react-native';
 import Metrics from '../../../Themes/Metrics';
 import Matrics from '../../../Themes/Metrics';
 
@@ -11,7 +11,7 @@ const CartStyles = (color) =>{
     return StyleSheet.create({
         container: {
             flex: 1,
-            margin: Matrics.base,
+            // margin: Matrics.base,
             backgroundColor: color.white
         },
         titleProduct: {
@@ -39,12 +39,19 @@ const CartStyles = (color) =>{
         },
         ProductContainer: {
             flexDirection: 'row',
-            marginHorizontal: Matrics.small,
-            elevation: 3,
+            marginHorizontal: Matrics.base,
+            backgroundColor: color.light ,
             paddingBottom: Matrics.base,
-            width: width - 30,
-            borderWidth: 0.1,
+            width: width - 20,
+            borderWidth: Platform.OS === 'ios' ? 0.3 : 0.1 ,
             marginVertical: Matrics.small,
+            shadowColor: 'black',
+			shadowOpacity: 0.3,
+			shadowOffset: {
+				width: Matrics.small,
+				height: Matrics.small
+			},
+           
         },
         nameProduct: {
             marginLeft: Matrics.base,
@@ -60,6 +67,7 @@ const CartStyles = (color) =>{
             alignItems: 'flex-end',
             marginTop: Matrics.small,
             marginRight: Matrics.base,
+            flex: 1
     
         },
         number:{

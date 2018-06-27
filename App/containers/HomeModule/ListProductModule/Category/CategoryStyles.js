@@ -15,6 +15,12 @@ const CategoryStyles = (color) =>{
 			backgroundColor: color.white,
 			elevation: Matrics.small,
 			marginVertical: Matrics.small,
+			shadowColor: 'black',
+			shadowOpacity: 0.3,
+			shadowOffset: {
+				width: Matrics.small,
+				height: Matrics.small
+			},
 	
 		},
 		title: {

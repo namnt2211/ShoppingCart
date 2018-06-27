@@ -1,4 +1,4 @@
-import { StyleSheet,Dimensions } from 'react-native';
+import { StyleSheet,Dimensions, Platform } from 'react-native';
 import Fonts from '../../../../Themes/Fonts';
 import Matrics from '../../../../Themes/Metrics';
 import Colors, {Colors2} from '../../../../Themes/Colors';
@@ -12,7 +12,14 @@ const ProductStyles = (color) =>{
 
         container: {
             margin: Matrics.base,
-            backgroundColor: color.white
+            backgroundColor: color.white,
+            elevation: 10,
+            shadowColor: 'black',
+			shadowOpacity: 0.3,
+			shadowOffset: {
+				width: Matrics.small,
+				height: Matrics.base
+            }
         },
         titleProduct: {
             height: 50,
@@ -39,13 +46,20 @@ const ProductStyles = (color) =>{
             elevation: Matrics.small,
             paddingBottom: Matrics.base,
             width: widthImageProduct,
-            borderWidth: 0.1,
+            borderWidth: Platform.OS === 'ios' ? 0.3 : 0.1,
             marginBottom: Matrics.doubleBase,
+            shadowColor: 'black',
+			shadowOpacity: 0.3,
+			shadowOffset: {
+				width: Matrics.small,
+				height: Matrics.small
+			},
         },
         infoProduct:{
             flexDirection: 'row', 
             justifyContent: 'space-around', 
-            alignItems: 'center' 
+            alignItems: 'center', 
+            marginTop: Matrics.base,
         },
         nameProduct: {
             marginLeft: Matrics.base,

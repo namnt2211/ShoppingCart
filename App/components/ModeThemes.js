@@ -9,15 +9,15 @@ import {connect} from 'react-redux';
 import * as actions from '../redux/actions/index';
 import {DrawerActions} from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import BaseComponent from './BaseComponent'
 
-
-class ModeThemes extends Component {
+class ModeThemes extends BaseComponent {
 
     constructor(props) {
       super(props)
     
       this.state = {
-         mode: true
+         mode: false,
       };
     };
 
@@ -27,10 +27,12 @@ class ModeThemes extends Component {
     }
     
     _changeMode = () =>{
+        
         this.props.changeMode();
-       this.setState({
+        this.setState({
            mode: !this.state.mode
        })
+    //    this.setColor(this.state.mode);
        this.props.navigation.dispatch(DrawerActions.closeDrawer());
     }
   render() {
@@ -41,7 +43,8 @@ class ModeThemes extends Component {
                 Chế độ ban đêm
             </Text>
             <Switch
-                
+            // change size switch
+            style={{ transform: [{ scaleX: .7 }, { scaleY: .7 }] }}
                 onValueChange = {() =>this._changeMode()}
                 value = {this.state.mode}
 

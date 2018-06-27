@@ -10,17 +10,22 @@ import {connect} from 'react-redux';
 import * as actions from '../../../../redux/actions/index'
 import ProductStyles from './ProductStyles'
 import FlatListItem from './FlatListItem';
-import {Colors1 ,Colors2} from '../../../../Themes/Colors';
+import BaseComponent from '../../../../components/BaseComponent'
 
-class TopProduct extends Component {
-    
+class TopProduct extends BaseComponent {
+    constructor(props) {
+        super(props)
+      
+        this.state = {
+           color: this.getColor()
+        };
+      };
     render() {
-        var {searchProduct, products, mode} = this.props;
-        var color = mode === true ? Colors1 : Colors2;
-		const styless = ProductStyles(color);
+        var {searchProduct, products} = this.props;
+		const styless = ProductStyles(this.state.color);
         const data = searchProduct.length === 0 ? products : searchProduct;
         return (
-            <View style={styless.container} elevation = {10} >
+            <View style={styless.container}>
 
                 <View style={styless.titleProduct} >
                     <Text style={styless.title}>

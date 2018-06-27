@@ -1,10 +1,11 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import Matrics from '../../Themes/Metrics';
 
 
 const HeaderStyles = (color) =>{
     return StyleSheet.create({
         container: {
+            
             height: 50,
             justifyContent: 'center',
             backgroundColor: color.lightBlue,

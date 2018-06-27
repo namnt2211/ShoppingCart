@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 import {
 	StyleSheet,
     Text,
-    Image,
-	View, Button, TouchableOpacity,
-	ActivityIndicator
+	View, 
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import HeaderComponent from '../HeaderModule/HeaderComponent'
-export default class OrderHistory extends Component {
+import BaseComponent from '../../components/BaseComponent'
+import {connect} from 'react-redux'
+class OrderHistory extends BaseComponent {
 	static navigationOptions = ({ navigation }) => {
 		const { params = {} } = navigation.state;
 		let drawerLabel = 'Lịch sử mua hàng';
@@ -23,10 +23,17 @@ export default class OrderHistory extends Component {
             
 		return {drawerLabel, drawerIcon }
 	}
-
+	constructor(props) {
+	  super(props)
+	
+	  this.state = {
+		 color: this.getColor()
+	  };
+	};
+	
+	
 	render() {
-
-
+		console.log('order:', this.state.color)
 		return (
             <View style={styles.container}>
 				<HeaderComponent {...this.props}/>
@@ -36,7 +43,7 @@ export default class OrderHistory extends Component {
 					alignItems: 'center'
 				}}>
 					<Text style={styles.text}>
-                        Order History
+                        {JSON.stringify(this.state.color)}
 					</Text>
 				</View>
 			</View>
@@ -44,6 +51,13 @@ export default class OrderHistory extends Component {
 	}
 }
 
+mapStateToProps = (state) =>{
+	return {
+		mode: state.changeMode
+	}
+}
+
+export default connect(mapStateToProps, null)(OrderHistory);
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
